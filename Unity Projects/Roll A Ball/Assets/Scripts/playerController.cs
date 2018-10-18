@@ -7,11 +7,6 @@ public class playerController : MonoBehaviour {
     public float speed;
     private Rigidbody rb;
 
-    //void Update()
-    //{
-    //    // Update is called before rendering a frame
-    //}
-
     void Start()
     {
         // Get Component of Rigidbody in Unity Object
@@ -31,5 +26,14 @@ public class playerController : MonoBehaviour {
 
         rb.AddForce(movement * speed);
     }
-    
+
+    void OnTriggerEnter(Collider other)
+    {
+        // Much more powerful to detect string value
+        if (other.gameObject.CompareTag("Pick Up"))
+        {
+            other.gameObject.SetActive(false); // Just like a checkbox to activate/deactivate
+        }
+    }
+
 }
