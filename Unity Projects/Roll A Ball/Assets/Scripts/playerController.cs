@@ -6,11 +6,13 @@ public class playerController : MonoBehaviour {
     // apply input to player 
     public float speed;
     private Rigidbody rb;
+    private int count; // Declare private value
 
     void Start()
     {
         // Get Component of Rigidbody in Unity Object
-        rb = GetComponent<Rigidbody>();    
+        rb = GetComponent<Rigidbody>();
+        count = 0; // Initialize Count
     }
 
     void FixedUpdate()
@@ -33,6 +35,7 @@ public class playerController : MonoBehaviour {
         if (other.gameObject.CompareTag("Pick Up"))
         {
             other.gameObject.SetActive(false); // Just like a checkbox to activate/deactivate
+            count++; // Add count by 1
         }
     }
 
