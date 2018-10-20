@@ -10,6 +10,9 @@ public class playerController : MonoBehaviour {
     private int count; // Declare private value
     public Text countText; // Init text variable
     public Text winText; // Init Total Text
+    private Text exitText;
+    public Button exitButton;
+    private string activeOrNot;
 
     void Start()
     {
@@ -18,6 +21,9 @@ public class playerController : MonoBehaviour {
         count = 0; // Initialize Count
         SetCountText(); // Initialize Count Text
         winText.text = ""; // Initialize Win Text
+        exitText = exitButton.GetComponentInChildren<Text>();
+        exitText.text = "";
+        active("false");
     }
 
     void FixedUpdate()
@@ -32,6 +38,7 @@ public class playerController : MonoBehaviour {
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
 
         rb.AddForce(movement * speed);
+
     }
 
     void OnTriggerEnter(Collider other)
@@ -48,11 +55,30 @@ public class playerController : MonoBehaviour {
     // Create a new function
     void SetCountText()
     {
+        active("false");
         countText.text = "Count : " + count.ToString(); // Initialize Count Text
         if(count >= 9)
         {
+            Debug.Log("You ended the game !");
             winText.text = "You Win !"; // Set Win Text
+            active("true");
+            exitGame();
         }
+    }
+    void active(string activeOrNot)
+    {
+        if(activeOrNot == "true")
+        {
+            GameObject.Find("Exit Button").SetActive(true);
+        }else if(activeOrNot == "false" && exitButton == null)
+        {
+            GameObject.Find("Exit Button").SetActive(false);
+        }
+    }
+
+    void exitGame()
+    {
+        exitText.text = "Exit Game";
     }
 
 }
