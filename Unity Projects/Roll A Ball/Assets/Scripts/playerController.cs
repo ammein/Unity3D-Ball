@@ -20,10 +20,25 @@ public class playerController : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         count = 0; // Initialize Count
         SetCountText(); // Initialize Count Text
-        winText.text = ""; // Initialize Win Text
+        winText.text = ""; // Initialize Win Text4
         exitText = exitButton.GetComponentInChildren<Text>();
         exitText.text = "";
         active("false");
+    }
+
+    void Update()
+    {
+        //if (count >= 9)
+        //{
+        //    active("true");
+        //}
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Debug.Log("Escape Pressed !" , this);
+            exitApp();
+        }
+
     }
 
     void FixedUpdate()
@@ -41,6 +56,11 @@ public class playerController : MonoBehaviour {
 
     }
 
+    void exitApp()
+    {
+        Application.Quit();
+    }
+
     void OnTriggerEnter(Collider other)
     {
         // Much more powerful to detect string value
@@ -55,13 +75,11 @@ public class playerController : MonoBehaviour {
     // Create a new function
     void SetCountText()
     {
-        active("false");
         countText.text = "Count : " + count.ToString(); // Initialize Count Text
         if(count >= 9)
         {
             Debug.Log("You ended the game !");
             winText.text = "You Win !"; // Set Win Text
-            active("true");
             exitGame();
         }
     }
@@ -69,10 +87,10 @@ public class playerController : MonoBehaviour {
     {
         if(activeOrNot == "true")
         {
-            GameObject.Find("Exit Button").SetActive(true);
-        }else if(activeOrNot == "false" && exitButton == null)
+            GameObject.FindGameObjectWithTag("Exit Button").SetActive(true);
+        }else if(activeOrNot == "false")
         {
-            GameObject.Find("Exit Button").SetActive(false);
+            GameObject.FindGameObjectWithTag("Exit Button").SetActive(false);
         }
     }
 
