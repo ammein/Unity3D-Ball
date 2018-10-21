@@ -13,6 +13,7 @@ public class playerController : MonoBehaviour {
     private Text exitText;
     public Button exitButton;
     private string activeOrNot;
+    public float jump;
 
     void Start()
     {
@@ -53,6 +54,11 @@ public class playerController : MonoBehaviour {
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
 
         rb.AddForce(movement * speed);
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            rb.AddForce(0.0f, jump , 0.0f);
+        }
 
     }
 
