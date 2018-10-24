@@ -12,6 +12,10 @@ public class ShipController : MonoBehaviour {
     private Rigidbody rb;
     public float speed;
     public float tilt;
+    public GameObject shots;
+    public Transform shotSpawn; // we want it to write as : shotSpawn.transform.position
+    public float fireRate;
+    public float nextFire;
 
     // Init Instance of Boundary class
     public Boundary boundary;
@@ -20,6 +24,19 @@ public class ShipController : MonoBehaviour {
     {
         // To get current gameObject (Ship) RigidBody
         rb = GetComponent<Rigidbody>();
+    }
+
+    void Update()
+    {
+        // Check if button pressed and current time is bigger than nextFire
+        if(Input.GetButton("Fire1") && Time.time > nextFire)
+        {
+            Debug.Log("Normal time : " + Time.time);
+            // Update NextFire as our Current Time
+            nextFire = Time.time + fireRate;
+            // Clone Object
+            Instantiate(shots, shotSpawn.position, shotSpawn.rotation);
+        }
     }
 
     void FixedUpdate()
