@@ -19,11 +19,13 @@ public class ShipController : MonoBehaviour {
 
     // Init Instance of Boundary class
     public Boundary boundary;
+    private AudioSource sound; // Make it private variable
 
     void Start()
     {
         // To get current gameObject (Ship) RigidBody
         rb = GetComponent<Rigidbody>();
+        sound = GetComponent<AudioSource>(); // Accessing/Get the Component audio source on Start()
     }
 
     void Update()
@@ -31,6 +33,7 @@ public class ShipController : MonoBehaviour {
         // Check if button pressed and current time is bigger than nextFire
         if(Input.GetButton("Fire1") && Time.time > nextFire)
         {
+            sound.Play(); // PLay the audio
             Debug.Log("Normal time : " + Time.time);
             // Update NextFire as our Current Time
             nextFire = Time.time + fireRate;
