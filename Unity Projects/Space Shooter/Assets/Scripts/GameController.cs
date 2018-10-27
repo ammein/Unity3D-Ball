@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; // To enable UI for text
 
 public class GameController : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GameController : MonoBehaviour
     public float spawnWait; // To hold before spawning the next one
     public float startWait;
     public float waveWait;
+    public Text scoreText; // Score Text Asset
 
     void Start()
     {
