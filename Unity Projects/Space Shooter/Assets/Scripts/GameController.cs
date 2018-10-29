@@ -13,9 +13,18 @@ public class GameController : MonoBehaviour
     public float waveWait;
     public Text scoreText; // Score Text Asset
     private int score; // To hold our current score
+    public Text restartText;
+    public Text gameOverText;
+
+    private bool gameOver; // Flags for if else that the game is over.
+    private bool restart; // Flags for if else that the restart is trigger.
 
     void Start()
     {
+        gameOver = false; // Flag it when start of the game
+        restart = false; // Flag it when start of the game
+        restartText.text = ""; // Make it empty text
+        gameOverText.text = ""; // Make it empty text
         score = 0;
         UpdateScore(); // Update into our starting value
         StartCoroutine(SpawnWaves()); // Initialize
@@ -37,6 +46,13 @@ public class GameController : MonoBehaviour
             }
 
             yield return new WaitForSeconds(waveWait);
+
+            if (gameOver)
+            {
+                restartText.text = "Press 'R' to Restart";
+                restart = true;
+                break;
+            }
         }
     }
 
@@ -45,6 +61,13 @@ public class GameController : MonoBehaviour
     {
         score += newScoreValue; // To Add Score Value
         UpdateScore(); // Update Score Text
+    }
+
+    // To make available on another GameObject References
+    public void GameOver()
+    {
+        gameOverText.text = "Game Over";
+        gameOver = true;
     }
 
     void UpdateScore()
