@@ -12,9 +12,12 @@ public class GameController : MonoBehaviour
     public float startWait;
     public float waveWait;
     public Text scoreText; // Score Text Asset
+    private int score; // To hold our current score
 
     void Start()
     {
+        score = 0;
+        UpdateScore(); // Update into our starting value
         StartCoroutine(SpawnWaves()); // Initialize
     }
 
@@ -35,5 +38,17 @@ public class GameController : MonoBehaviour
 
             yield return new WaitForSeconds(waveWait);
         }
+    }
+
+    // Public function to addScore when hazards is destroyed
+    public void AddScore (int newScoreValue)
+    {
+        score += newScoreValue; // To Add Score Value
+        UpdateScore(); // Update Score Text
+    }
+
+    void UpdateScore()
+    {
+        scoreText.text = "Score : " + score;
     }
 }
