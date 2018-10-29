@@ -30,6 +30,20 @@ public class GameController : MonoBehaviour
         StartCoroutine(SpawnWaves()); // Initialize
     }
 
+    void Update()
+    {
+        if (restart)
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                // Using Application.load
+                // LoadLevel / Scene File specified in parenthesis
+                // Instead of using string or any reference key , we just simply load the current level
+                Application.LoadLevel(Application.loadedLevel);
+            }
+        }
+    }
+
     // To make enable for WaitForSeconds
     IEnumerator SpawnWaves()
     {
